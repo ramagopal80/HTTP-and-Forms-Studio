@@ -1,19 +1,71 @@
 <!doctype html>
-
 <head>
-	<meta charset="utf-8">
-	<script>
-		// TODO: create a handler
-    window.addEventListener("load", function(){
-        // TODO: register the handler
-    });
-	</script>
-</head>
+    <style>
+        label {display: block;}
+        body {padding: 100px;}
+     </style>
+    <script>
+        function setSearchEngine() {
 
+            let actions = {
+                "google": "https://www.google.com/search",
+                "duckduckgo": "https://duckduckgo.com/",
+                "bing": "https://www.bing.com/search",
+                "ask": "https://www.ask.com/web"
+            };
+
+            let form = document.getElementById('searchForm');
+            let selectedEngine = document.querySelector('[name=engine]:checked');
+            let action = actions[selectedEngine.value];
+            form.setAttribute('action', action);
+        }
+
+        window.addEventListener('load', function(){
+            let form = document.getElementById('searchForm');
+            form.addEventListener('submit', function(setSearchEngine){
+                //let validateSearchEngineInput = document.querySelector("input[name=engine]"); Do second
+                let validateSearchEngineInput = document.querySelector("input[name=engine]:checked"); // Do second true answer
+                let validateSearchStringInput = document.querySelector("input[name=q]"); // Do Third and add the label to text input below
+                if (!validateSearchEngineInput.value || !validateSearchStringInput.value) {
+                    alert("All fields are required");
+                    setSearchEngine.preventDefault();
+                //   } else {
+                // form.addEventListener('submit', setSearchEngine);
+                 }
+            });
+        });
+        window.addEventListener('load', function(){
+            let form = document.getElementById('searchForm');
+            form.addEventListener('submit', setSearchEngine);
+        });
+                //alert("User Has Submitted Form"); // Do First
+                //alert("User has selected: " + validateSearchEngineInput.value); // Do Second
+                //alert("User has selected: " + validateSearchEngineInput.value + " and would like to search the term: " + validateSearchStringInput.value); // Do Second and third
+    </script>
+</head>
 <body>
 
-	<form id="searchForm">
-    <!-- TODO: add form elements -->
-	</form>
+    <form id="searchForm">
+        <label>
+            <input type="text" name="q" /> 
+        </label>
+        <label>
+            <input type="radio" name="engine" value="google" />
+            Google 
+        </label>
+        <label>
+            <input type="radio" name="engine" value="duckduckgo" />
+            DuckDuckGo 
+        </label>
+        <label>
+            <input type="radio" name="engine" value="bing" />
+            Bing 
+        </label>
+        <label>
+            <input type="radio" name="engine" value="ask" />
+            Ask 
+        </label>
+        <input type="submit" value="Go!" />
+    </form>
 
 </body>
